@@ -43,27 +43,10 @@ fun SampleGrid(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        /*
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-                .background(Purple500),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = "Make It Easy Grid",
-                color = Color.White,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
-        }*/
-
         LazyVerticalGrid(
             cells = GridCells.Fixed(4),
             modifier = Modifier
-                .padding(10.dp)
+                .padding(5.dp)
         ) {
             items(sampleData) { data ->
                 SampleDataGridItem(data, navController)
@@ -80,45 +63,25 @@ fun SampleDataGridItem(data: SampleData, navController: NavController) {
                 val itemVal = Gson().toJson(data)
                 navController.navigate("sample_grid_detail/$itemVal")
             }
-            .padding(10.dp)
+            .padding(5.dp)
             .fillMaxSize(),
         elevation = 5.dp,
         shape = RoundedCornerShape(5.dp)
     ) {
         Column(
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier.padding(9.dp)
         ) {
             Image(
                 painterResource(R.drawable.mie_img),
                 contentDescription = "Grid Image",
                 modifier = Modifier
-                    .width(70.dp)
-                    .height(70.dp)
-                    .padding(5.dp)
+                    .width(100.dp)
+                    .height(100.dp)
+                    .padding(1.dp)
                     .clip(RoundedCornerShape(5.dp))
             )
 
-            Spacer(modifier = Modifier.padding(3.dp))
-
-            Text(
-                text = data.name,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally),
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Bold,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            Spacer(modifier = Modifier.padding(5.dp))
-
-            Text(
-                text = data.desc,
-                fontSize = 15.sp,
-                fontWeight = FontWeight.Normal,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
+            Spacer(modifier = Modifier.padding(18.dp))
         }
     }
 }
