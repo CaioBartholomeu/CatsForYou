@@ -25,10 +25,27 @@ import com.google.gson.reflect.TypeToken
 import retrofit.Callback
 import retrofit.Response
 import retrofit.Retrofit
+import java.net.HttpURLConnection
+import java.net.URL
 
 @ExperimentalFoundationApi
 @Composable
 fun SampleGrid() {
+
+/////////////////////////////
+    val url = URL("https://api.imgur.com/3/gallery/search/?q=cats")
+    val conn = url.openConnection() as HttpURLConnection
+    conn.apply {
+        addRequestProperty("client_id", "1ceddedc03a5d71")
+        addRequestProperty("client_secret", "63775118a9f912fd91ed99574becf3b375d9")
+        setRequestProperty("Authorization", "OAuth 2")
+    }
+////////////////////////////
+
+
+
+
+
     val context = LocalContext.current
 
     val dataFileString = getJsonDataFromAsset(context, "SampleData.json")
@@ -78,15 +95,9 @@ fun SampleDataGridItem(data: SampleData) {
     Card(
 
         modifier = Modifier
-            /*
-            .clickable {
-                val itemVal = Gson().toJson(data)
-                navController.navigate("sample_grid_detail/$itemVal")
-            }
-                */
             .padding(5.dp)
             .fillMaxSize(),
-        elevation = 5.dp,
+        elevation = 1.dp,
         shape = RoundedCornerShape(5.dp)
 
 
@@ -96,22 +107,12 @@ fun SampleDataGridItem(data: SampleData) {
             modifier = Modifier.padding(9.dp)
         ) {
             Image(
-                //painter = rememberImagePainter("https://i.imgur.com/lK4AcJ1.jpg"),
                 painter = rememberImagePainter(data.link),
                 contentDescription = "Grid Image",
-                modifier = Modifier.size(128.dp)
-                /*
-                painterResource(R.drawable.mie_img),
-                contentDescription = "Grid Image",
-                modifier = Modifier
-                    .width(100.dp)
-                    .height(100.dp)
-                    .padding(1.dp)
-                    .clip(RoundedCornerShape(5.dp))
-                    */
+                modifier = Modifier.size(100.dp)
             )
 
-            Spacer(modifier = Modifier.padding(18.dp))
+            Spacer(modifier = Modifier.padding(0.dp))
         }
     }
 }
